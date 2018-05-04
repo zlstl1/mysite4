@@ -5,17 +5,18 @@ public class GuestbookVO {
 	String name;
 	String password;
 	String content;
-	String date;
+	String reg_date;
+	
 	
 	public GuestbookVO() {
 	}
-	
-	public GuestbookVO(int no, String name, String password, String content, String date) {
+
+	public GuestbookVO(int no, String name, String password, String content, String reg_date) {
 		this.no = no;
 		this.name = name;
 		this.password = password;
 		this.content = content;
-		this.date = date;
+		this.reg_date = reg_date;
 	}
 
 	public int getNo() {
@@ -50,19 +51,22 @@ public class GuestbookVO {
 		this.content = content;
 	}
 
-	public String getDate() {
-		return date;
+	public String getReg_date() {
+		return reg_date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 
 	@Override
 	public String toString() {
 		return "GuestbookVO [no=" + no + ", name=" + name + ", password=" + password + ", content=" + content
-				+ ", date=" + date + "]";
+				+ ", reg_date=" + reg_date + "]";
 	}
+	
+	
+	
 	
 	
 	

@@ -10,6 +10,17 @@
 			order by no desc
 		]]>
 	</select>
+	
+	<select id="getScrollList" parameterType="map" resultType="com.javaex.vo.GuestbookVO">
+		<![CDATA[
+			SELECT *  
+			FROM (	SELECT ROWNUM RNUM, temp.*  
+					FROM (	SELECT * 
+							FROM guestbook 
+							ORDER BY no DESC) temp) 
+			WHERE RNUM BETWEEN #{start} AND #{end}
+		]]>
+	</select>
 
 	<insert id="add" parameterType="com.javaex.vo.GuestbookVO">
 		<![CDATA[
@@ -29,5 +40,27 @@
 			no=#{no}
 		]]>
 	</delete>
+	
+	<insert id="insert2" parameterType="com.javaex.vo.GuestbookVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">	
+			select guestbook_seq.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into guestbook 
+			values(#{no}
+			,#{name}
+			,#{password}
+			,#{content}
+			,sysdate)
+		]]>
+	</insert>
+	
+	<select id="select" parameterType="int" resultType="com.javaex.vo.GuestbookVO">
+		<![CDATA[
+			select *
+			from guestbook
+			where no = #{no}
+		]]>
+	</select>
 	
 </mapper>

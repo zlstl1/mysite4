@@ -23,11 +23,12 @@ public class BoardService {
 	}
 	
 	public BoardVo view(int no) {
+		boardDao.hitup(no);
 		return boardDao.view(no);
 	}
 	
-	public void hitup(int no,int hit) {
-		boardDao.hitup(no,hit);
+	public BoardVo getVo(int no) {
+		return boardDao.view(no);
 	}
 	
 	public void modify(BoardVo boardVo) {

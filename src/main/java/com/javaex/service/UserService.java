@@ -31,4 +31,7 @@ public class UserService {
 		return userDao.userModify(userVo);
 	}
 	
+	public boolean isExists(String email) {
+		return userDao.isExists(email);
+	}
 }

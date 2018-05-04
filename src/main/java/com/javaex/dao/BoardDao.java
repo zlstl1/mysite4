@@ -28,12 +28,8 @@ public class BoardDao {
 		return sqlSession.selectOne("board.view",no);
 	}
 	
-	public void hitup(int no,int hit) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("no", no);
-		hit++;
-		map.put("hit", hit);
-		sqlSession.update("board.hitup",map);
+	public void hitup(int no) {
+		sqlSession.update("board.hitup",no);
 	}
 	
 	public void modify(BoardVo boardVo) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ public class GuestbookController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(GuestbookVO guestbookVo) {
+	public String add(@ModelAttribute GuestbookVO guestbookVo) {
 		System.out.println("add");
 		guestbookService.add(guestbookVo);
 		return "redirect:/guestbook/list";
@@ -42,10 +43,19 @@ public class GuestbookController {
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String delete(GuestbookVO guestbookVo) {
+	public String delete(@ModelAttribute GuestbookVO guestbookVo) {
 		System.out.println("delete");
 			guestbookService.delete(guestbookVo);
 		return "redirect:/guestbook/list";
 	}
+	
+	/////////////////////////////////////////////////////////////             ajax
+	
+	@RequestMapping(value="/list-ajax", method=RequestMethod.GET)
+	public String ajaxlist() {
+		System.out.println("list-ajax");
+		return "guestbook/ajax-list";
+	}
+	
 	
 }

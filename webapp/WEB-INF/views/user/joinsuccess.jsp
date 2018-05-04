@@ -29,7 +29,6 @@
 				</div><!-- /user -->
 			</div><!-- /content -->
 		</div><!-- /wrapper -->
-		
 		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		
 	</div> <!-- /container -->

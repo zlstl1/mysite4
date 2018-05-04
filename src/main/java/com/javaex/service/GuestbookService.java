@@ -18,12 +18,27 @@ public class GuestbookService {
 		return guestbookDao.getList();
 	}
 	
+	public List<GuestbookVO> getScrollList(int start,int end) {
+		return guestbookDao.getScrollList(start,end);
+	}
+	
 	public void add(GuestbookVO guestbookVo) {
 		guestbookDao.add(guestbookVo);
 	}
 	
 	public void delete(GuestbookVO guestbookVo) {
 		guestbookDao.delete(guestbookVo);
+	}
+	
+	public int ajax_delete(GuestbookVO guestbookVo) {
+		return guestbookDao.ajax_delete(guestbookVo);
+	}
+	
+	public GuestbookVO write(GuestbookVO guestbookVo) {
+		int no = guestbookDao.insert2(guestbookVo);
+		
+		GuestbookVO vo = guestbookDao.select(no);
+		return vo; 
 	}
 	
 }

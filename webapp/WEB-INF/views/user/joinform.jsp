@@ -6,6 +6,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+	
+	
 	<title>Insert title here</title>
 </head>
 <body>
@@ -27,7 +31,9 @@
 	
 						<label class="block-label" for="email">이메일</label>
 						<input id="email" name="email" type="text" value="">
-						<input type="button" value="id 중복체크">
+						<input id="btnEmailCheck" type="button" value="id 중복체크">
+						
+						<span id="msg"></span>
 						
 						<label class="block-label">패스워드</label>
 						<input name="password" type="password" value="">
@@ -57,4 +63,35 @@
 	</div> <!-- /container -->
 
 </body>
+
+<script type="text/javascript">
+	$("#btnEmailCheck").on("click",function(){
+		console.log("이메일 체크 버튼");
+		
+		var email = $("#email").val();
+		console.log(email);
+		
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath }/user/emailcheck",		
+			type : "post",
+			data : {email: email},
+
+			dataType : "json",
+			success : function(isExists){
+				console.log(isExists);
+				if(isExists == true){
+					$("#msg").html("사용중인 아이디 입니다.")
+				}else {
+					$("#msg").html("사용가능한 아이디 입니다.")
+				}
+				/*성공시 처리해야될 코드 작성*/
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		
+	})
+</script>
 </html>

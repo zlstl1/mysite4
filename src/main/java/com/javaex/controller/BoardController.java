@@ -42,9 +42,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public String view(@RequestParam("no") int no,@RequestParam("hit") int hit, Model model) {
+	public String view(@RequestParam("no") int no, Model model) {
 		System.out.println("view");
-		boardService.hitup(no,hit);
 		BoardVo boardVo = boardService.view(no);
 		model.addAttribute("BoardVo",boardVo);
 		return "board/view";
@@ -53,7 +52,7 @@ public class BoardController {
 	@RequestMapping(value="/modifyform", method=RequestMethod.GET)
 	public String modifyform(@RequestParam("no") int no, Model model) {
 		System.out.println("modifyform");
-		BoardVo boardVo = boardService.view(no);
+		BoardVo boardVo = boardService.getVo(no);
 		model.addAttribute("vo",boardVo);
 		return "board/modify";
 	}
@@ -62,7 +61,7 @@ public class BoardController {
 	public String modifyform(@ModelAttribute BoardVo boardVo) {
 		System.out.println("modify");
 		boardService.modify(boardVo);
-		return "board/list";
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
@@ -73,7 +72,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public String search(@RequestParam("kwd") String kwd,Model model) {
+	public String search(@RequestParam( value = "kwd", required=false, defaultValue="%") String kwd,
+			Model model
+			) {
 		System.out.println("search");
 		List<BoardVo> list = boardService.search(kwd);
 		model.addAttribute("list", list);

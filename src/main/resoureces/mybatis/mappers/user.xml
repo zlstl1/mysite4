@@ -41,4 +41,12 @@
 		]]>
 	</update>
 
+	<select id="isExists" parameterType="String" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+		select * 
+		from users 
+		where email=#{email}
+		]]>
+	</select>
+	
 </mapper>

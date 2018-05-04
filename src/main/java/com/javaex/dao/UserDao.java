@@ -35,4 +35,9 @@ public class UserDao {
 		return sqlSession.update("user.userModify",userVo);
 	}
 	
+	public boolean isExists(String email) {
+		UserVo userVo = sqlSession.selectOne("user.isExists",email);
+		return (userVo!=null);
+	}
+	
 }

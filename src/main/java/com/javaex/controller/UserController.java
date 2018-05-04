@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -73,7 +74,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public String modifyform(UserVo userVo,HttpSession session) {
+	public String modifyform(@ModelAttribute UserVo userVo,HttpSession session) {
 		System.out.println("modify");
 		int result = userService.userModify(userVo);
 		if(result!=0) {
@@ -83,6 +84,15 @@ public class UserController {
 		}
 		
 		return "redirect:/main";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/emailcheck", method=RequestMethod.POST)
+	public boolean exists(@RequestParam("email") String email) {
+		System.out.println("ajax 이메일 체크 " + email);
+		boolean isExists = userService.isExists(email);
+		
+		return isExists;
 	}
 	
 }

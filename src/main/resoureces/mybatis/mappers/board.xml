@@ -40,9 +40,9 @@
 		]]>
 	</select>
 	
-	<update id="hitup" parameterType="map">
+	<update id="hitup" parameterType="int">
 		<![CDATA[
-			update board set hit=#{hit}
+			update board set hit=hit+1
 			where no=#{no}
 		]]>
 	</update>
@@ -66,9 +66,10 @@
 	<select id="search" parameterType="String" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			select * 
-			from board,users 
+			from 	(select *
+					from board
+					where title like #{kwd} or content like #{kwd}) board , users 
 			where board.user_no=users.no 
-			and board.title like #{kwd} 
 			order by board.no desc
 		]]>
 	</select>
